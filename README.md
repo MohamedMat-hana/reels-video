@@ -13,6 +13,12 @@ A ready-to-use vertical video feed (like Instagram Reels or TikTok) built with R
 - Built with `react-native-video` and `react-native-swiper-flatlist`
 
 ---
+## 🎥 Demo Video
+
+Click the image below to watch the demo video:
+
+[![Demo Video](https://via.placeholder.com/500x300.png?text=Click+to+Watch+Video)](https://d2j573v2dl06b0.cloudfront.net/v7j3x0%2Ffile%2F9821547da33508fd5344ad0593998ae1_a9f45b85f91fa973db42a8fe72b51b03.mp4?response-content-disposition=inline%3Bfilename%3D%229821547da33508fd5344ad0593998ae1_a9f45b85f91fa973db42a8fe72b51b03.mp4%22%3B&response-content-type=video%2Fmp4&Expires=1745185571&Signature=AGsE6H~uHH9WQ7~iGwHXL3EMCbSPEJ8YBECnZZSRBe69UCN8Y3J6kstcl8rqCKbbJlP9EFaXZVuJQTRKzsQTKf6o5uR3slqx~Q225a4iT0Ig0KJt0zKiSuTcksWwj89J4BqbPKg8V8owrDesGTb0767Znc8bfA3ar3qMPHdWg2n8Xerqr~HA9iKOF9Ra7oF5OrJ9W6yRHjTp1fJ2zN-lsyxbuEbTh-JqGOG-lGfoK-FPKpXJr2lsDNsRI6AnTjicSxoCzs2K6Gk0dT9VBxeEDoDt-HUPYv4VxynGp67WeVzXu3Vp6DtxOvdMdpjMTgjoEGMe7sLHcoBJV0fkdUuNbw__&Key-Pair-Id=APKAJT5WQLLEOADKLHBQ)
+---
 
 ## Installation
 
