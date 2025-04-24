@@ -1,4 +1,4 @@
-# 📱 React Native Reels
+# 📱 react-native-reels-player
 
 A ready-to-use vertical video feed (like Instagram Reels or TikTok) built with React Native. This package allows you to embed short video feeds with play/pause on scroll, mute/unmute on tap, and interactive features like like/share/comments.
 

@@ -5,30 +5,32 @@ import {
   TouchableOpacity,
   Image,
   Share,
-  Text,
   StyleSheet,
+  Text,
 } from 'react-native';
 import Video from 'react-native-video';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import CommentsModal from './CommentsModal';
 
-const SingleReel = ({ item, index, currentIndex }) => {
+const SingleReel = ({ item, index, currentIndex, updatePostData, personalData }) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
   const [mute, setMute] = useState(false);
-  const [like, setLike] = useState(item.isLike);
-  const [likeCount, setLikeCount] = useState(item.likes);
+  const [showComments, setShowComments] = useState(false);
+  const [videoError, setVideoError] = useState(null);
+
+  // Log props for debugging
+  console.log('SingleReel props:', { item, personalData, index, currentIndex });
 
   const handleLike = () => {
-    if (like) {
-      setLikeCount(prevCount => prevCount - 1);
-    } else {
-      setLikeCount(prevCount => prevCount + 1);
-    }
-    setLike(!like);
+    updatePostData({
+      isLike: !item.isLike,
+      likes: item.isLike ? item.likes - 1 : item.likes + 1,
+    });
   };
 
   const shareVideo = async (videoUrl) => {
@@ -40,11 +42,7 @@ const SingleReel = ({ item, index, currentIndex }) => {
       });
 
       if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          console.log('Shared with activity type:', result.activityType);
-        } else {
-          console.log('Shared successfully');
-        }
+        console.log('Shared successfully');
       } else if (result.action === Share.dismissedAction) {
         console.log('Share dismissed');
       }
@@ -54,8 +52,27 @@ const SingleReel = ({ item, index, currentIndex }) => {
   };
 
   const videoRef = useRef(null);
-  const onBuffer = buffer => console.log('buffering', buffer);
-  const onError = error => console.log('error', error);
+  const onBuffer = buffer => console.log('Buffering:', buffer);
+  const onError = error => {
+    console.log('Video error:', error);
+    setVideoError(error);
+  };
+
+   if (!item || !item.video) {
+    return (
+      <View style={[styles.container, { width: windowWidth, height: windowHeight, justifyContent: 'center', alignItems: 'center' }]}>
+        <Text>Invalid reel data</Text>
+      </View>
+    );
+  }
+
+   if (videoError) {
+    return (
+      <View style={[styles.container, { width: windowWidth, height: windowHeight, justifyContent: 'center', alignItems: 'center' }]}>
+        <Text>Failed to load video: {item.video}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={[styles.container, { width: windowWidth, height: windowHeight }]}>
@@ -64,11 +81,12 @@ const SingleReel = ({ item, index, currentIndex }) => {
         onPress={() => setMute(!mute)}
         style={styles.touchArea}>
         <Video
-          videoRef={videoRef}
+          ref={videoRef}
           onBuffer={onBuffer}
           onError={onError}
           repeat={true}
-          resizeMode="contain"
+          muted={mute}
+          resizeMode="cover"
           paused={currentIndex !== index}
           source={{ uri: item.video }}
           style={styles.video}
@@ -86,45 +104,52 @@ const SingleReel = ({ item, index, currentIndex }) => {
         ]}
       />
 
+      <CommentsModal
+        visible={showComments}
+        onClose={() => setShowComments(false)}
+        comments={item.comments || []}
+        onUpdateComments={(updatedComments) => updatePostData({ comments: updatedComments })}
+        postProfile={item.postProfile?{uri:item.postProfile}:require("./Icons/user.png")}
+        personalData={personalData}
+      />
+
       <View style={[styles.contentBottom, { width: windowWidth }]}>
         <TouchableOpacity style={{ width: 150 }}>
           <View style={styles.profileRow}>
             <View style={styles.profileImageContainer}>
               <Image
-                source={{ uri: item.postProfile }}
+                source={item.postProfile?{uri:item.postProfile}:require("./Icons/user.png")}
                 style={styles.profileImage}
               />
             </View>
-            <Text style={styles.titleText}>{item.title}</Text>
+            <Text style={styles.titleText}>{item.title || 'Untitled'}</Text>
           </View>
         </TouchableOpacity>
-        <Text style={styles.descriptionText}>{item.description}</Text>
-        <View style={styles.audioRow}>
-          <Ionicons name="musical-note" style={styles.audioIcon} />
-          <Text style={styles.audioText}>Original Audio</Text>
-        </View>
+
+        <Text style={styles.descriptionText}>{item.description || ''}</Text>
       </View>
 
       <View style={styles.actionsContainer}>
         <TouchableOpacity onPress={handleLike} style={styles.actionButton}>
           <AntDesign
-            name={like ? 'heart' : 'hearto'}
-            style={[styles.likeIcon, { color: like ? 'red' : "#fff" }]}
+            name={item.isLike ? 'heart' : 'hearto'}
+            style={[styles.likeIcon, { color: item.isLike ? 'red' : "white" }]}
           />
-          <Text style={styles.iconText}>{likeCount.toLocaleString()}</Text>
+          <Text style={styles.iconText}>{(item.likes || 0).toLocaleString()}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.actionButton}>
+        <TouchableOpacity style={styles.actionButton} onPress={() => setShowComments(true)}>
           <EvilIcons name="comment" size={30} style={styles.iconColor} />
+          <Text style={styles.iconText}>{(item.comments || []).length}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.actionButton, { zIndex: 1, marginBottom: 40, }]} onPress={() => shareVideo(item.video)}>
+        <TouchableOpacity style={[styles.actionButton, { zIndex: 1, marginBottom: 40 }]} onPress={() => shareVideo(item.video)}>
           <Ionic name="paper-plane-outline" style={styles.shareIcon} />
         </TouchableOpacity>
 
         <View style={styles.miniProfileContainer}>
           <Image
-            source={{ uri: item.postProfile }}
+            source={{uri:item.postProfile}}
             style={styles.miniProfileImage}
           />
         </View>
@@ -138,7 +163,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#000"
   },
   touchArea: {
     width: '100%',
@@ -151,8 +175,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   volumeIcon: {
-    color: "#fff",
-
+    color: "white",
     position: 'absolute',
     backgroundColor: 'rgba(52,52,52,0.6)',
     borderRadius: 100,
@@ -172,8 +195,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 100,
-    backgroundColor: "#fff",
-
+    backgroundColor: "white",
     margin: 10,
   },
   profileImage: {
@@ -183,13 +205,11 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   titleText: {
-    color: "#fff",
-
+    color: "white",
     fontSize: 20,
   },
   descriptionText: {
-    color: "#fff",
-
+    color: "white",
     fontSize: 14,
     marginHorizontal: 10,
   },
@@ -198,13 +218,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   audioIcon: {
-    color: "#fff",
-
+    color: "white",
     fontSize: 16,
   },
   audioText: {
-    color: "#fff",
-
+    color: "white",
   },
   actionsContainer: {
     position: 'absolute',
@@ -213,20 +231,20 @@ const styles = StyleSheet.create({
   },
   actionButton: {
     padding: 10,
-    alignItems: "center"
+    right: 10,
   },
   likeIcon: {
     fontSize: 25,
   },
   iconText: {
-    color: "#fff",
-    textAlign: "center"
+    color: "white",
+    textAlign: 'center',
   },
   iconColor: {
-    color: "#fff",
+    color: "white",
   },
   shareIcon: {
-    color: "#fff",
+    color: "white",
     fontSize: 25,
   },
   miniProfileContainer: {
@@ -234,7 +252,7 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: "#fff",
+    borderColor: "white",
   },
   miniProfileImage: {
     width: '100%',

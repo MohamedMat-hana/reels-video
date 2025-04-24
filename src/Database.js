@@ -1,4 +1,4 @@
- 
+
 export const videoData = [
     {
         video: "https://media.istockphoto.com/id/1491314939/video/motion-graphic-of-blue-data-matrix-simulation-digital-grid-line-and-ai-technology-icon-with.mp4?s=mp4-640x640-is&k=20&c=tOsLIMIF5IxF0Bnc4lhrMkCxrbW_wMMH78CkvrK4CzI=",
@@ -7,6 +7,16 @@ export const videoData = [
         description: 'React js in my pocket',
         likes: 5,
         isLike: false,
+        comments: [
+            {
+                id: '1',
+                user: 'Adham Maged',
+                ProfileImage: "https://media.licdn.com/dms/image/v2/D4D22AQEWVK49mQyKBA/feedshare-shrink_1280/feedshare-shrink_1280/0/1719774724906?e=1747872000&v=beta&t=_irrN2DXVS0iGXYpjUI66aFEWufmp34VNRkaE--nzd0",
+                text: 'Great video!',
+                likes: 5,
+                isLiked: false,
+            },
+        ],
     },
     {
         video: "https://media.istockphoto.com/id/1708228020/video/group-of-asian-people-software-developers-using-computer-to-write-code-sitting-at-desk-with.mp4?s=mp4-640x640-is&k=20&c=AUMOcPfpENrpUV-XY4KswcrpfTrjkVVHWZ6xwMi97OY=",
@@ -15,6 +25,16 @@ export const videoData = [
         description: "I`m the GOAT of Backend",
         likes: 44,
         isLike: false,
+        comments: [
+            {
+                id: '1',
+                user: 'Ziad',
+                ProfileImage: "https://instagram.fcai21-2.fna.fbcdn.net/v/t51.2885-19/466056857_914849613445434_8728535783830485563_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=instagram.fcai21-2.fna.fbcdn.net&_nc_cat=106&_nc_oc=Q6cZ2QHt9QFHQCWvcE_8iSYP6OWwd48XF18YKDHmCbZ6h9cS9P7Ydg4V_4QlK_TK4ypW4Ks&_nc_ohc=nxuDVeb5wmgQ7kNvwG5Pfj3&_nc_gid=M16BogqXFwfh0QuIQcCEFg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfHNWKDXy1uR_6h_vymz8xXxJ4Dpc2xu0epOCBSM54C6Zg&oe=680ADB2A&_nc_sid=8b3546",
+                text: 'i don`t think so',
+                likes: 5,
+                isLiked: false,
+            },
+        ],
     },
     {
         video: "https://media.istockphoto.com/id/2152099951/video/vertical-video-engineer-writing-code-in-high-tech-facility-with-server-rows.mp4?s=mp4-640x640-is&k=20&c=w-CgWYcgj5Srvhn2ktOMLpMqcMPHvVrxfY0lpSMB8i4=",
@@ -23,6 +43,25 @@ export const videoData = [
         description: 'watch it',
         likes: 8,
         isLike: false,
+        comments: [
+            {
+                id: '1',
+                user: 'Ziad',
+                ProfileImage: "https://instagram.fcai21-2.fna.fbcdn.net/v/t51.2885-19/466056857_914849613445434_8728535783830485563_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=instagram.fcai21-2.fna.fbcdn.net&_nc_cat=106&_nc_oc=Q6cZ2QHt9QFHQCWvcE_8iSYP6OWwd48XF18YKDHmCbZ6h9cS9P7Ydg4V_4QlK_TK4ypW4Ks&_nc_ohc=nxuDVeb5wmgQ7kNvwG5Pfj3&_nc_gid=M16BogqXFwfh0QuIQcCEFg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfHNWKDXy1uR_6h_vymz8xXxJ4Dpc2xu0epOCBSM54C6Zg&oe=680ADB2A&_nc_sid=8b3546",
+                text: 'the Real GOAT :)',
+                likes: 5,
+                isLiked: false,
+            },
+            {
+                id: '2',
+                user: 'Adham Maged',
+                ProfileImage: "https://media.licdn.com/dms/image/v2/D4D22AQEWVK49mQyKBA/feedshare-shrink_1280/feedshare-shrink_1280/0/1719774724906?e=1747872000&v=beta&t=_irrN2DXVS0iGXYpjUI66aFEWufmp34VNRkaE--nzd0",
+                text: 'it is a very Good Mo :)',
+                likes: 5,
+                isLiked: false,
+            },
+        ],
+
     },
     {
         video: "https://media.istockphoto.com/id/1399237391/video/powerful-soccer-player-kicking-the-ball-in-the-air-at-the-field-while-playing-a-game-at.mp4?s=mp4-640x640-is&k=20&c=EVaCwZs_1heb44cOxAwQ5Wnq39GeV6YHSKtQ5FaCESQ=",
@@ -31,7 +70,7 @@ export const videoData = [
         description: 'How greate it is !!',
         likes: 5,
         isLike: false,
+        comments: [],
     },
 ];
 
- 
