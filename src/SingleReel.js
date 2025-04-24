@@ -58,7 +58,7 @@ const SingleReel = ({ item, index, currentIndex, updatePostData, personalData })
     setVideoError(error);
   };
 
-   if (!item || !item.video) {
+  if (!item || !item.video) {
     return (
       <View style={[styles.container, { width: windowWidth, height: windowHeight, justifyContent: 'center', alignItems: 'center' }]}>
         <Text>Invalid reel data</Text>
@@ -66,7 +66,7 @@ const SingleReel = ({ item, index, currentIndex, updatePostData, personalData })
     );
   }
 
-   if (videoError) {
+  if (videoError) {
     return (
       <View style={[styles.container, { width: windowWidth, height: windowHeight, justifyContent: 'center', alignItems: 'center' }]}>
         <Text>Failed to load video: {item.video}</Text>
@@ -109,7 +109,7 @@ const SingleReel = ({ item, index, currentIndex, updatePostData, personalData })
         onClose={() => setShowComments(false)}
         comments={item.comments || []}
         onUpdateComments={(updatedComments) => updatePostData({ comments: updatedComments })}
-        postProfile={item.postProfile?{uri:item.postProfile}:require("./Icons/user.png")}
+        postProfile={item.postProfile ? { uri: item.postProfile } : require("./Icons/user.png")}
         personalData={personalData}
       />
 
@@ -118,7 +118,7 @@ const SingleReel = ({ item, index, currentIndex, updatePostData, personalData })
           <View style={styles.profileRow}>
             <View style={styles.profileImageContainer}>
               <Image
-                source={item.postProfile?{uri:item.postProfile}:require("./Icons/user.png")}
+                source={item.postProfile ? { uri: item.postProfile } : require("./Icons/user.png")}
                 style={styles.profileImage}
               />
             </View>
@@ -149,7 +149,7 @@ const SingleReel = ({ item, index, currentIndex, updatePostData, personalData })
 
         <View style={styles.miniProfileContainer}>
           <Image
-            source={{uri:item.postProfile}}
+            source={{ uri: item.postProfile }}
             style={styles.miniProfileImage}
           />
         </View>

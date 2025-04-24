@@ -1,4 +1,3 @@
-
 export const videoData = [
     {
         video: "https://media.istockphoto.com/id/1491314939/video/motion-graphic-of-blue-data-matrix-simulation-digital-grid-line-and-ai-technology-icon-with.mp4?s=mp4-640x640-is&k=20&c=tOsLIMIF5IxF0Bnc4lhrMkCxrbW_wMMH78CkvrK4CzI=",
@@ -74,3 +73,8 @@ export const videoData = [
     },
 ];
 
+
+export const mineData = {
+    username: 'mine',
+    profileImage: "https://avatars.githubusercontent.com/u/110176043?v=4&size=64",
+};
