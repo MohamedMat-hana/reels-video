@@ -68,7 +68,7 @@ export default function App() {
 ## 🧠 Data Format
 This package uses a predefined data format for each video item:
 
-```json
+```javascript
 [
   {
     video: 'https://your-video-url.mp4',
